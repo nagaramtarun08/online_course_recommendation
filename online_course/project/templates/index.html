@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Recommender</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        input, button { margin: 10px; padding: 10px; font-size: 16px; }
+        .result { margin-top: 20px; font-size: 18px; }
+    </style>
+</head>
+<body>
+    <h2>Online Course Recommender</h2>
+    <form action="/recommend" method="post">
+        <input type="number" name="user_id" placeholder="Enter User ID" required>
+        <button type="submit">Get Recommendations</button>
+    </form>
+
+    {% if recommendations %}
+        <div class="result">
+            <h3>Recommended Courses:</h3>
+            <ul>
+                {% for course in recommendations %}
+                    <li>{{ course }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</body>
+</html>
