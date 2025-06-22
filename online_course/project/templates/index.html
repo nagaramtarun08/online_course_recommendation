@@ -2,100 +2,99 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Recommender</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f4f6f9;
+            background: #f0f2f5;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            background: white;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
         h2 {
-            margin-top: 50px;
-            color: #2c3e50;
+            margin-bottom: 20px;
+            color: #333;
         }
 
-        form {
-            background: white;
-            padding: 30px;
-            margin-top: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
         }
 
         input[type="number"] {
-            width: 250px;
             padding: 10px;
+            width: 100%;
+            max-width: 300px;
             border: 1px solid #ccc;
-            border-radius: 8px;
+            border-radius: 5px;
             font-size: 16px;
+            margin-bottom: 20px;
         }
 
         button {
             padding: 10px 20px;
             font-size: 16px;
-            background-color: #3498db;
-            border: none;
             color: white;
-            border-radius: 8px;
+            background: #007bff;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
         }
 
         button:hover {
-            background-color: #2980b9;
-        }
-
-        .result {
-            margin-top: 30px;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            width: 90%;
-            max-width: 600px;
-        }
-
-        .result h3 {
-            color: #27ae60;
+            background: #0056b3;
         }
 
         ul {
             list-style-type: none;
             padding: 0;
+            margin-top: 20px;
+            text-align: left;
         }
 
         li {
-            background: #ecf0f1;
-            margin: 10px 0;
             padding: 10px;
-            border-radius: 5px;
-            text-align: left;
+            background: #f9f9f9;
+            margin-bottom: 8px;
+            border-left: 4px solid #007bff;
+            border-radius: 4px;
+        }
+
+        h3 {
+            margin-top: 30px;
+            color: #444;
         }
     </style>
 </head>
 <body>
-    <h2>Online Course Recommender</h2>
-    <form action="/recommend" method="post">
-        <input type="number" name="user_id" placeholder="Enter User ID" required>
-        <button type="submit">Get Recommendations</button>
-    </form>
+    <div class="container">
+        <h2>Online Course Recommender</h2>
+        <form action="/recommend" method="POST">
+            <label for="user_id">Enter User ID:</label>
+            <input type="number" name="user_id" required>
+            <br>
+            <button type="submit">Get Recommendations</button>
+        </form>
 
-    {% if recommendations %}
-        <div class="result">
+        {% if recommendations %}
             <h3>Recommended Courses:</h3>
             <ul>
                 {% for course in recommendations %}
-                    <li>{{ course }}</li>
+                    <li>{{ course[1] }} (ID: {{ course[0] }})</li>
                 {% endfor %}
             </ul>
-        </div>
-    {% endif %}
+        {% endif %}
+    </div>
 </body>
 </html>
